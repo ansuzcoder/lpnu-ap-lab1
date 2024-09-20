@@ -1,3 +1,6 @@
+import lab2.Customer;
+import lab2.Validator;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;

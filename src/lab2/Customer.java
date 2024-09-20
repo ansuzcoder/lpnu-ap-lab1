@@ -1,3 +1,5 @@
+package lab2;
+
 public class Customer {
     private final int customerId;
     private String lastName;
@@ -93,7 +95,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "<Customer>{customerId: " + this.customerId
+        return "<lab2.Customer>{customerId: " + this.customerId
                 + ", lastName: " + this.lastName
                 + ", firstName: " + this.firstName
                 + ", patronym: " + this.patronym

@@ -1,3 +1,5 @@
+package lab1;
+
 public class FibonacciNumber {
     private final int numberPosition;
     private final int numberValue;

@@ -1,6 +1,8 @@
+package lab2;
+
 import java.util.regex.Pattern;
 
-class Validator {
+public class Validator {
     public boolean validateOptionChoice(String choice) {
         return choice.equalsIgnoreCase("а") || choice.equalsIgnoreCase("б") || choice.equalsIgnoreCase("в");
     }
