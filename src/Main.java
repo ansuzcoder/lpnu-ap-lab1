@@ -1,3 +1,5 @@
+import lab1.FibonacciNumber;
+
 import java.util.Scanner;
 
 import java.util.ArrayList;
