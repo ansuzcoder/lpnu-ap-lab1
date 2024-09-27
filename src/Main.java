@@ -1,8 +1,10 @@
 import lab3.gameComponents.gameSetup.InputHandler;
 import lab3.gameComponents.gameSetup.battleModes.DuelHandler;
 
+import java.io.FileNotFoundException;
+
 class   Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         InputHandler inputHandler = new InputHandler();
         String battleMode = inputHandler.getBattleMode();
 
@@ -11,9 +13,14 @@ class   Main {
                 DuelHandler duelHandler = new DuelHandler();
                 duelHandler.setUpDuel();
                 duelHandler.runDuel();
+
+                System.setOut(System.out);
+                System.out.println("The Battle has been recorded to DuelRecord.txt");
                 break;
             case "b":
                 System.out.println("No team battle released yet");
+                System.setOut(System.out);
+                System.out.println("The Battle has been recorded to TeamBattleRecord.txt");
                 break;
         }
     }
