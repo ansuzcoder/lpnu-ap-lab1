@@ -23,21 +23,27 @@ public class Droid {
 
     public int getDroidMaxHp() { return maxHp; }
     public int getDroidHp() { return droidHp; }
-    public void updateDroidHp(int droidHp) { this.droidHp = droidHp; }
+    public void updateDroidHp(int droidHp) { this.droidHp = Math.min(maxHp, Math.max(0, droidHp)); }
 
     public int getDroidDp() { return droidDp; }
     public void updateDroidDp(int droidDp) { this.droidDp = droidDp; }
 
     public void disconnectDroid() { status = Status.DISCONNECTED; }
     public Status checkDroidStatus() { return status; }
+    public boolean isIntact() { return checkDroidStatus() == Status.ACTIVE; }
 
     public void handleReceivedDamage(int damage) {
-        if (damage <= 0) { return; }
+        int droidHp = this.getDroidHp();
+        int hpChange = droidHp - damage;
 
-        int currentDroidHp = getDroidHp();
-        updateDroidHp(currentDroidHp - damage);
+        if (hpChange <= 0) {
+            System.out.println(this + " is eliminated...");
+             this.updateDroidHp(0);
+             this.disconnectDroid();
+             return;
+         }
 
-        if (getDroidHp() == 0) { disconnectDroid(); }
+        this.updateDroidHp(hpChange);
     }
 
     public void attackEnemy(Droid targetDroid) {
@@ -46,12 +52,10 @@ public class Droid {
             return;
         }
 
-        int targetDroidHp = targetDroid.getDroidHp();
-        int currentDroidDp = getDroidDp();
+        int currentDroidDp = this.getDroidDp();
 
-        targetDroid.handleReceivedDamage(targetDroidHp - currentDroidDp);
-
-        if (targetDroid.getDroidHp() == 0) { targetDroid.disconnectDroid(); }
+        System.out.println(this + " attacks enemy [" + targetDroid + "]");
+        targetDroid.handleReceivedDamage(currentDroidDp);
     }
 
     @Override

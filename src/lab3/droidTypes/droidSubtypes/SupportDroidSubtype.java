@@ -1,6 +1,13 @@
 package lab3.droidTypes.droidSubtypes;
 
-public enum SupportDroidSubtype {
+import lab3.droidTypes.DroidType;
+
+public enum SupportDroidSubtype implements DroidSubtype {
     REPAIR,
-    ENHANCER
+    ENHANCER;
+
+    @Override
+    public DroidType getDroidType() {
+        return DroidType.SUPPORT;
+    }
 }

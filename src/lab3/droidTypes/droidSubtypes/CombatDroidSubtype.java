@@ -1,6 +1,13 @@
 package lab3.droidTypes.droidSubtypes;
 
-public enum CombatDroidSubtype {
+import lab3.droidTypes.DroidType;
+
+public enum CombatDroidSubtype implements DroidSubtype {
     STORMTROOPER,
-    SUICIDE_BOMBER
+    SUICIDE_BOMBER;
+
+    @Override
+    public DroidType getDroidType() {
+        return DroidType.COMBAT;
+    }
 }
