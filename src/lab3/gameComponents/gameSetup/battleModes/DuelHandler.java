@@ -9,10 +9,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
-public class DuelHandler {
-    File duelRecord = new File("DuelRecord.txt");
+public class DuelHandler implements BattleHandler {
+    File duelRecord = new File("./src/lab3/records/DuelRecord.txt");
     FileOutputStream fos = new FileOutputStream(duelRecord);
+    PrintStream console = System.out;
     PrintStream ps = new PrintStream(fos);
 
     InputHandler inputHandler = new InputHandler();
@@ -24,7 +28,8 @@ public class DuelHandler {
     public DuelHandler() throws FileNotFoundException {
     }
 
-    public void setUpDuel() {
+    @Override
+    public void setUpBattle() {
         System.out.println("Assembling Droid-A for battle...");
         String droidAType = inputHandler.getDroidChoice();
         String droidASubtype = inputHandler.getDroneSpec(droidAType);
@@ -39,11 +44,13 @@ public class DuelHandler {
         droidB = droidGenerator.createDroid(droidClassB.getDroidType(), droidClassB.getDroidSubtype());
     }
 
-    public void runDuel() {
+    @Override
+    public void runBattle() {
         System.setOut(ps);
         System.out.println("Battle Starts!");
         System.out.println("Combatant 1: [" + droidA.toString() + "]");
         System.out.println("Combatant 2: [" + droidB.toString() + "]");
+        System.out.println();
         while (true) {
             droidA.attackEnemy(droidB);
             if (!droidB.isIntact()) {
@@ -59,4 +66,30 @@ public class DuelHandler {
         }
     }
 
+    @Override
+    public void displayDroids() {
+        System.setOut(console);
+        System.out.println("Requested: [DROID DISPLAY]. Status: [GRANTED]");
+        System.out.println("Combatant 1: [" + droidA.toString() + "]");
+        System.out.println("Combatant 2: [" + droidB.toString() + "]");
+    }
+
+    @Override
+    public void replayBattle() {
+        System.setOut(console);
+        BufferedReader bufferedReader;
+        try {
+            bufferedReader = new BufferedReader(new FileReader(duelRecord));
+            String line = bufferedReader.readLine();
+
+            while (line != null) {
+                System.out.println(line);
+                line = bufferedReader.readLine();
+            }
+
+            bufferedReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

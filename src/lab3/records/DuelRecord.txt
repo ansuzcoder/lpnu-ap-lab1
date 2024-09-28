@@ -1,0 +1,11 @@
+Battle Starts!
+Combatant 1: [DROID INFO: [Battle droid {RX-99}, droid type: {COMBAT}, droid spec.: {STORMTROOPER}]]
+Combatant 2: [DROID INFO: [Battle droid {XT-88}, droid type: {COMBAT}, droid spec.: {STORMTROOPER}]]
+
+DROID INFO: [Battle droid {RX-99}, droid type: {COMBAT}, droid spec.: {STORMTROOPER}] attacks enemy [DROID INFO: [Battle droid {XT-88}, droid type: {COMBAT}, droid spec.: {STORMTROOPER}]]
+DROID INFO: [Battle droid {XT-88}, droid type: {COMBAT}, droid spec.: {STORMTROOPER}] attacks enemy [DROID INFO: [Battle droid {RX-99}, droid type: {COMBAT}, droid spec.: {STORMTROOPER}]]
+Droid A HP left: 30
+Droid B HP left: 30
+
+DROID INFO: [Battle droid {RX-99}, droid type: {COMBAT}, droid spec.: {STORMTROOPER}] attacks enemy [DROID INFO: [Battle droid {XT-88}, droid type: {COMBAT}, droid spec.: {STORMTROOPER}]]
+DROID INFO: [Battle droid {XT-88}, droid type: {COMBAT}, droid spec.: {STORMTROOPER}] is eliminated...

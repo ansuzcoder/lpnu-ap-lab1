@@ -2,11 +2,30 @@ package lab3.gameComponents.gameSetup;
 
 import lab3.droidTypes.DroidType;
 import lab3.droidTypes.droidSubtypes.*;
+import lab3.gameComponents.gameSetup.battleModes.BattleHandler;
 
 import java.util.Scanner;
 
 public class InputHandler {
     Scanner scanner = new Scanner(System.in);
+
+    public String getAfterBattleChoice() {
+        System.out.println("Select your after battle option:");
+        System.out.println("\ta) Display involved droids");
+        System.out.println("\tb) Replay battle record");
+        return scanner.nextLine();
+    }
+
+    public void handleAfterBattleOption(BattleHandler battleHandler, String option) {
+        switch (option) {
+            case "a":
+                battleHandler.displayDroids();
+                break;
+            case "b":
+                battleHandler.replayBattle();
+                break;
+        }
+    }
 
     public String getBattleMode() {
         System.out.println("Choose battle mode:");

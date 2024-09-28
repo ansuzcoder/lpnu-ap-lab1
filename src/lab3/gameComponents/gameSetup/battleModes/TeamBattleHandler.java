@@ -9,16 +9,21 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class TeamBattleHandler {
+public class TeamBattleHandler implements BattleHandler {
     private static final Random rand = new Random();
 
-    File duelRecord = new File("TeamBattleRecord.txt");
-    FileOutputStream fos = new FileOutputStream(duelRecord);
+    File teamBattleRecord = new File("./src/lab3/records/TeamBattleRecord.txt");
+    FileOutputStream fos = new FileOutputStream(teamBattleRecord);
+
+    PrintStream console = System.out;
     PrintStream ps = new PrintStream(fos);
 
     InputHandler inputHandler = new InputHandler();
@@ -58,7 +63,13 @@ public class TeamBattleHandler {
         }
     }
 
-    public void runTeamBattle() {
+    @Override
+    public void setUpBattle() {
+        setUpTeam("A");
+        setUpTeam("B");
+    }
+
+    public void runBattle() {
         List<Droid> combinedDroids = new ArrayList<>(droidTeamA);
         combinedDroids.addAll(droidTeamA);
         combinedDroids.addAll(droidTeamB);
@@ -89,6 +100,40 @@ public class TeamBattleHandler {
                 }
             }
             System.out.println();
+        }
+    }
+
+    @Override
+    public void displayDroids() {
+        System.setOut(console);
+        System.out.println("Requested: [DROID DISPLAY]. Status: [GRANTED]");
+        System.out.println("Team 1");
+        for (Droid droid : droidTeamA) {
+            System.out.println(droid.toString());
+        }
+        System.out.println();
+        System.out.println("Team 2");
+        for (Droid droid : droidTeamB) {
+            System.out.println(droid.toString());
+        }
+    }
+
+    @Override
+    public void replayBattle() {
+        System.setOut(console);
+        BufferedReader bufferedReader;
+        try {
+            bufferedReader = new BufferedReader(new FileReader(teamBattleRecord));
+            String line = bufferedReader.readLine();
+
+            while (line != null) {
+                System.out.println(line);
+                line = bufferedReader.readLine();
+            }
+
+            bufferedReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
