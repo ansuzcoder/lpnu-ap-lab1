@@ -1,33 +1,37 @@
 package complex_lab.equipment;
 
-public class Weapon implements Equipment {
-    private final String pieceName;
-    private final double pieceWeight;
-    private final double piecePrice;
-    private final String affiliatedWith;
-
-    public Weapon(String name, double weight, double price, String affiliation) {
-        this.pieceName = name;
-        this.pieceWeight = weight;
-        this.piecePrice = price;
-        this.affiliatedWith = affiliation;
+public class Weapon extends Equipment {
+    private final String weaponSubtype;
+    
+    public Weapon(
+        String pieceName,
+        String weaponSubtype,
+        String pieceAffiliation,
+        double pieceWeight,
+        double piecePrice
+    ) {
+        super(pieceName, pieceAffiliation, pieceWeight, piecePrice);
+        this.weaponSubtype = weaponSubtype;
     }
-
-    public String getPieceName() {return this.pieceName;}
-
+    
     @Override
-    public double getPrice() {return this.piecePrice;}
-
-    @Override
-    public double getWeight() {return this.pieceWeight;}
-
-    @Override
-    public String getType() {return "weapon";}
-
-    public String getAffiliation() {return this.affiliatedWith;}
+    public String getPieceType() {return "weapon";}
+    public String getPieceSubtype() {return this.weaponSubtype;}
 
     @Override
     public String toString() {
-        return getType() + " <" + getPieceName() + "> | Weight: [" +getWeight() + "], Price: [" + getPrice() + "]";
+        return "<" +
+                this.getPieceName() +
+                " | type: [" +
+                this.getPieceType() +
+                "], subtype: [" +
+                this.getPieceSubtype() +
+                "], affiliation: [" +
+                this.getPieceAffiliation() +
+                "], weight: [" +
+                this.getPieceWeight() +
+                "], price: [" +
+                this.getPiecePrice() +
+                "]";
     }
 }
