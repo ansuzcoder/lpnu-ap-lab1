@@ -1,32 +1,45 @@
 package complex_lab;
 
-import complex_lab.armory.Equipment;
-import complex_lab.equipmentManagement.sorting.SortEquipment;
+import complex_lab.equipment.Equipment;
 
 import java.util.List;
 
 public class ForgeMaster {
-    private List<Equipment> equipmentList;
+    private final List<Equipment> availableEquipment;
+    private final Knight knight = new Knight();
 
-    public ForgeMaster(List<Equipment> equipmentList) {
-        this.equipmentList = equipmentList;
+    private double totalPrice = 0;
+
+    public ForgeMaster(List<Equipment> equipment) {
+        this.availableEquipment = equipment;
     }
 
-//    public void findEquipment(FindEquipment findCommand) {
-//        List<Equipment> foundEquipment = findCommand.find();
-//        foundEquipment.forEach(equipment -> System.out.println(equipment.getType() + ": " + equipment.getPrice()));
-//    }
-
-    public void sortEquipment(SortEquipment sortCommand) {
-        sortCommand.sort(equipmentList);
-        equipmentList.forEach(equipment -> System.out.println(equipment.getType() + ": " + equipment.getPrice()));
+    public void addEquipment(Equipment newEquipmentPiece) {
+        this.knight.addEquipment(newEquipmentPiece);
     }
 
-    public double calculateTotalPrice() {
-        double totalPrice = 0;
-        for (Equipment equipment : equipmentList) {
-            totalPrice += equipment.getPrice();
+    public void customizeKnight(OptionProvider op) {
+        String knightTypeFromUser = op.handleUserInput(List.of("a", "b", "c", "d", "e"));
+        knight.setKnightType(knightTypeFromUser);
+
+        boolean customizationProcessActive = true;
+        while (customizationProcessActive) {
+            System.out.println("Choose an option for your knight:");
+            System.out.println("\ta) Add equipment");
+            System.out.println("\tb) Remove equipment");
+            System.out.println("\tc) Choose an option for your knight:");
         }
-        return totalPrice;
     }
+
+    public Knight createKnight() {return this.knight;}
+
+    public void recalculateTotalPrice() {
+        double newTotalPrice = 0;
+        for (Equipment equipPiece : knight.getKnightEquipment()) {
+            newTotalPrice += equipPiece.getPrice();
+        }
+        this.totalPrice = newTotalPrice;
+    }
+
+    public double getFinalPrice() {return this.totalPrice;}
 }
