@@ -53,16 +53,15 @@ public class OptionProvider {
         System.out.println("Choose your option:");
         System.out.println("\t> a: find an item by price...");
         System.out.println("\t> b: find an item by weight...");
-        System.out.println("\t> c: find an item by name...");
 
-        availableOptions = List.of("a", "b", "c");
+        availableOptions = List.of("a", "b");
     }
 
     public void displaySortOptions() {
         System.out.println("Choose your option:");
         System.out.println("\t> a: sort items by price...");
         System.out.println("\t> b: sort items by weight...");
-        System.out.println("\t> c: sort items by name...");
+        System.out.println("\t> b: sort items by name...");
 
         availableOptions = List.of("a", "b", "c");
     }
@@ -89,5 +88,4 @@ public class OptionProvider {
         }
         return requestedWeight;
     }
-    public String getNameFromUser() {return sc.nextLine();}
 }

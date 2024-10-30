@@ -22,7 +22,7 @@ public class FindByWeight implements FindCommand {
     public List<Equipment> execute() {
         List<Equipment> resultEq = new ArrayList<>();
         for (Equipment equipmentPiece : this.equipment) {
-            if (equipmentPiece.getPieceWeight() <= this.weight) {
+            if (equipmentPiece.pieceWeight() <= this.weight) {
                 resultEq.add(equipmentPiece);
             }
         }

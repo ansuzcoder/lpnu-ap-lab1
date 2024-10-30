@@ -13,7 +13,7 @@ public class SortByPrice implements SortCommand {
 
     @Override
     public List<Equipment> execute() {
-        equipment.sort(Comparator.comparingDouble(Equipment::getPiecePrice));
+        equipment.sort(Comparator.comparingDouble(Equipment::piecePrice));
         return this.equipment;
     }
 }

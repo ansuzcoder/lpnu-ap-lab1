@@ -13,7 +13,7 @@ public class SortByWeight implements SortCommand {
 
     @Override
     public List<Equipment> execute() {
-        equipment.sort(Comparator.comparingDouble(Equipment::getPieceWeight));
+        equipment.sort(Comparator.comparingDouble(Equipment::pieceWeight));
         return this.equipment;
     }
 }

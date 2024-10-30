@@ -22,7 +22,7 @@ public class FindByPrice implements FindCommand {
     public List<Equipment> execute() {
         List<Equipment> resultEq = new ArrayList<>();
         for (Equipment equipmentPiece : this.equipment) {
-            if (equipmentPiece.getPiecePrice() <= this.price) {
+            if (equipmentPiece.piecePrice() <= this.price) {
                 resultEq.add(equipmentPiece);
             }
         }

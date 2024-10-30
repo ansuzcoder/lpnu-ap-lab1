@@ -1,20 +1,46 @@
 package complex_lab.forgery;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+
 import complex_lab.equipment.Equipment;
 
 public class Knight {
-    private List<Equipment> eq;
-    private final String knightAffiliation;
+    private final Map<String, Equipment> knightEq;
+    private final String knightType;
 
-    public Knight(String knightAffiliation) {
-        eq = new ArrayList<>();
-        this.knightAffiliation = knightAffiliation;
+    public Knight(String knightTypeOption) {
+        this.knightEq = new HashMap<>();
+        switch (knightTypeOption) {
+            case "a":
+                knightType = "TEMPLARS";
+                break;
+            case "b":
+                knightType = "BLADES";
+                break;
+            case "c":
+                knightType = "WARDENS";
+                break;
+            default:
+                knightType = "COMMONER";
+                break;
+        }
     }
 
-    public String getAffiliation() {return this.knightAffiliation;}
-    public List<Equipment> getCurrEquipment() {return this.eq;}
+    public String getKnightType() {return this.knightType;}
+    public Map<String, Equipment> getCurrEquipment() {return this.knightEq;}
     
-    public void setNewEquipment(List<Equipment> newEq) {this.eq = newEq;}
+    public void addEquipment(Equipment eqp) {
+        String pieceType = eqp.getPieceType().toUpperCase();
+        String pieceAffiliation = eqp.pieceAffiliation().toUpperCase();
+        if (this.knightEq.get(pieceType) != null && this.getKnightType().equals(pieceAffiliation)) {
+            this.knightEq.put(pieceType, eqp);
+        } else {
+            throw new IllegalArgumentException("[Cannot add equipment: already owned or wrong affiliation]");
+        }
+    }
+
+    public void removeEquipment(String eqp) {
+        this.knightEq.remove(eqp.toUpperCase());
+    }
 }

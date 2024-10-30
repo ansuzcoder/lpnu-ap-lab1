@@ -13,7 +13,7 @@ public class SortByName implements SortCommand {
 
     @Override
     public List<Equipment> execute() {
-        equipment.sort(Comparator.comparing(Equipment::getPieceName));
+        equipment.sort(Comparator.comparing(Equipment::pieceName));
         return this.equipment;
     }
 }

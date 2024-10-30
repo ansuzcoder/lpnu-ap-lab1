@@ -1,7 +1,7 @@
 package complex_lab.forgery;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import complex_lab.commands.FindCommand;
 import complex_lab.commands.SortCommand;
@@ -18,22 +18,6 @@ public class ForgeMaster {
 
     public ForgeMaster(List<Equipment> equipment) {this.eq = equipment;}
 
-    public boolean checkAffiliation(Equipment eqp) {
-        String knightAffiliation = knight.getAffiliation();
-        return knightAffiliation.equals(eqp.getPieceAffiliation()); 
-    }
-
-    public boolean duplicateTypesPresent(Equipment eqp) {
-        String targetType = eqp.getPieceType();
-        for (Equipment equipment : eq) {
-            String pieceType = equipment.getPieceType();
-            if (pieceType.equals(targetType)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public void createKnight(String knightType) {this.knight = new Knight(knightType);}
 
     public void setSortCommand(SortCommand newSortCommand) {this.sortCommand = newSortCommand;}
@@ -45,33 +29,21 @@ public class ForgeMaster {
     public List<Equipment> getAvailableEquipment() {return this.eq;}
     public double getTotalPrice() {return this.eqPrice;}
 
-    public void addEquipment(Equipment eqp) {
-        if (checkAffiliation(eqp)) {
-            if (!duplicateTypesPresent(eqp)) {
-                List<Equipment> currEq = knight.getCurrEquipment();
-                currEq.add(eqp);
-                knight.setNewEquipment(currEq);
-            }
-        } else {
-            System.out.println("Impossible to add equipment piece: affiliation not supported.");
-        }
+    public void addEquipment(Equipment newEquipment) {
+        this.knight.addEquipment(newEquipment);
         calculateEquipmentPrice();
     }
 
-    public void removeEquipment(Equipment eqp) {
-        List<Equipment> newEq = new ArrayList<>();
-        for (Equipment equipment : eq) {
-            if (!equipment.equals(eqp)) {
-                newEq.add(equipment);
-            }
-        }
+    public void removeEquipment(Equipment newEquipment) {
+        this.knight.removeEquipment(newEquipment.getPieceType().toUpperCase());
         calculateEquipmentPrice();
     }
 
     public void calculateEquipmentPrice() {
         double newTotalPrice = 0;
-        for (Equipment equipment : eq) {
-            newTotalPrice += equipment.getPiecePrice();
+        Map<String, Equipment> knightEq = this.knight.getCurrEquipment();
+        for (Equipment equipment : knightEq.values()) {
+            newTotalPrice += equipment.piecePrice();
         }
         this.eqPrice = newTotalPrice;
     }

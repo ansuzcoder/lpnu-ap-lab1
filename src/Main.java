@@ -44,7 +44,7 @@ public class Main {
                     displayEq(selectedEq);
                     break;
                 case "q":
-                    System.out.println("Exiting forde... See you next time!");
+                    System.out.println("Exiting forge... See you next time!");
                     inForge = false;
                     break;
             }
