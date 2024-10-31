@@ -31,9 +31,9 @@ public class Knight {
     public Map<String, Equipment> getCurrEquipment() {return this.knightEq;}
     
     public void addEquipment(Equipment eqp) {
-        String pieceType = eqp.getPieceType().toUpperCase();
+        String pieceType = eqp.pieceType().toUpperCase();
         String pieceAffiliation = eqp.pieceAffiliation().toUpperCase();
-        if (this.knightEq.get(pieceType) != null && this.getKnightType().equals(pieceAffiliation)) {
+        if (this.knightEq.get(pieceType) == null && this.getKnightType().equals(pieceAffiliation)) {
             this.knightEq.put(pieceType, eqp);
         } else {
             throw new IllegalArgumentException("[Cannot add equipment: already owned or wrong affiliation]");
@@ -42,5 +42,13 @@ public class Knight {
 
     public void removeEquipment(String eqp) {
         this.knightEq.remove(eqp.toUpperCase());
+    }
+
+    public void displayKnightEq() {
+        for (Map.Entry<String, Equipment> entry : this.knightEq.entrySet()) {
+            String key = entry.getKey().toUpperCase();
+            Equipment eqp = entry.getValue();
+            System.out.println(key + ": " + eqp.toString());
+        }
     }
 }

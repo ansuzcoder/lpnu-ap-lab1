@@ -34,7 +34,6 @@ public class Main {
     
             switch (startMenuChoice) {
                 case "a":
-                    op.displayKnightCreationOptions();
                     oh.handleKnightCreation();
                     break;
                 case "b":

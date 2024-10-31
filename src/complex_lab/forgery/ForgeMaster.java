@@ -34,8 +34,8 @@ public class ForgeMaster {
         calculateEquipmentPrice();
     }
 
-    public void removeEquipment(Equipment newEquipment) {
-        this.knight.removeEquipment(newEquipment.getPieceType().toUpperCase());
+    public void removeEquipment(String eqType) {
+        this.knight.removeEquipment(eqType);
         calculateEquipmentPrice();
     }
 
@@ -46,5 +46,18 @@ public class ForgeMaster {
             newTotalPrice += equipment.piecePrice();
         }
         this.eqPrice = newTotalPrice;
+    }
+
+    public Equipment findEquipmentById(String equipmentId) {
+        for (Equipment equipment : this.eq) {
+            if (equipmentId.equalsIgnoreCase(equipment.pieceID())) {
+                return equipment;
+            }
+        }
+        return null;
+    }
+
+    public void displayKnight() {
+        this.knight.displayKnightEq();
     }
 }

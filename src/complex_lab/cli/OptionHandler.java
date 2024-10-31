@@ -19,7 +19,13 @@ public class OptionHandler extends OptionProvider {
         super(scanner);
         this.fm = fm;
     }
-    
+
+    public void displayAvailableEquipment() {
+        for (Equipment eq : this.fm.getAvailableEquipment()) {
+            System.out.println(eq);
+        }
+    }
+
     public List<Equipment> handleCatalogueOption(String userChoice) {
         List<Equipment> resultEq = new ArrayList<>();
         switch (userChoice) {
@@ -55,9 +61,6 @@ public class OptionHandler extends OptionProvider {
                         double requestedWeight = this.getWeightFromUser();
                         fm.setFindCommand(new FindByWeight(fm.getAvailableEquipment(), requestedWeight));
                         break;
-                    case "c":
-                        System.out.println("[... in progress...]");
-                        break;
                 }
 
                 resultEq = fm.executeFind();
@@ -71,20 +74,28 @@ public class OptionHandler extends OptionProvider {
         String knightType = this.getUserChoice();
         this.fm.createKnight(knightType);
 
-        this.displayKnightCreationOptions();
         boolean customizationProcessActive = true;
         while (customizationProcessActive) {
+            this.displayKnightCreationOptions();
             String userChoice = this.getUserChoice();
             switch (userChoice) {
+                // add equipment
                 case "a":
-                    System.out.println("... option <a> in progress ...");
+                    String eqToAddID = getEquipmentIDFromUser();
+                    Equipment requestedEq = this.fm.findEquipmentById(eqToAddID);
+                    this.fm.addEquipment(requestedEq);
                     break;
+                // remove equipment
                 case "b":
-                    System.out.println("... option <b> in progress ...");
+                    String eqToRemove = getTypeToRemove();
+                    this.fm.removeEquipment(eqToRemove);
                     break;
+                // exit forgery and calculate total price
                 case "c":
                     customizationProcessActive = false;
                     System.out.println("Total equipment price: [" + this.fm.getTotalPrice() + "]");
+                    System.out.println("Your knight:");
+                    this.fm.displayKnight();
                     break;
             }
         }

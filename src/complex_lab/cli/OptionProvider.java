@@ -33,12 +33,10 @@ public class OptionProvider {
     public void displayAvailableKnightTypes() {
         System.out.println("Choose your knight's affiliation:");
         System.out.println("\t> a: Templars");
-        System.out.println("\t> b: Night's Watch");
-        System.out.println("\t> c: Kingsguard");
-        System.out.println("\t> d: Blades");
-        System.out.println("\t> e: The Grey Wardens");
+        System.out.println("\t> b: Blades");
+        System.out.println("\t> c: Wardens");
 
-        availableOptions = List.of("a", "b", "c", "d", "e");
+        availableOptions = List.of("a", "b", "c");
     }
 
     public void displayCatalogueOptions() {
@@ -81,11 +79,35 @@ public class OptionProvider {
         }
         return requestedPrice;
     }
+
     public double getWeightFromUser() {
         double requestedWeight = sc.nextDouble();
         while (requestedWeight < 0 || requestedWeight > 50) {
             requestedWeight = sc.nextDouble();            
         }
         return requestedWeight;
+    }
+
+    /**
+     * Get equipment ID from user.
+     * Equipment ID is of length 4:
+     * [Equipment Affiliation][Equipment Type]-[Equipment No.]
+     * @return equipment ID as String
+     */
+    public String getEquipmentIDFromUser() {
+        String equipmentID = sc.nextLine();
+        while (!equipmentID.contains("-") && equipmentID.length() != 4) {
+            equipmentID = sc.nextLine();
+        }
+        return equipmentID.toUpperCase();
+    }
+
+    public String getTypeToRemove() {
+        List<String> allowedTypes = List.of("WEAPON", "TORSO", "HEADWEAR", "GAUNTLETS", "BOOTS");
+        String typeToRemove = sc.nextLine();
+        while (!allowedTypes.contains(typeToRemove)) {
+            typeToRemove = sc.nextLine();
+        }
+        return typeToRemove;
     }
 }
